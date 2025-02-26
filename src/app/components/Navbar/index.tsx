@@ -1,3 +1,4 @@
+import LoginModal from '@/app/components/LoginModal'
 import Link from 'next/link'
 
 const Navbar = () => {
@@ -23,11 +24,18 @@ const Navbar = () => {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2">MSR</div>
+            <div className="cursor-pointer mx-2 flex-1 px-2">
+              <Link href={"/"} >MSR</Link>
+            </div>
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
                 {/* Desktop Navbar Content */}
-                <li><Link href={'/dashboard'}>Dashboard</Link></li>
+                <li>
+                  <Link href={'/dashboard'}>Dashboard</Link>
+                </li>
+                <li>
+                  <LoginModal />
+                </li>
               </ul>
             </div>
           </div>
