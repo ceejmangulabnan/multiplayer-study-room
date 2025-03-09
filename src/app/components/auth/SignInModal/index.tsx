@@ -1,5 +1,6 @@
 "use client"
 
+import { signInWithGoogle } from '@/app/lib/auth.actions';
 import { useRef } from 'react'
 import { FcGoogle } from "react-icons/fc";
 
@@ -10,15 +11,17 @@ const SignInModal = () => {
     signInRef.current?.showModal()
   }
 
+  const handleGoogleSignIn = async () => {
+    await signInWithGoogle()
+  }
   return (
     <div>
-      <button onClick={handleOpen}>Login</button>
-      <dialog ref={signInRef} id="login-modal" className="modal modal-bottom sm:modal-middle">
+      <button onClick={handleOpen}>Sign In</button>
+      <dialog ref={signInRef} id="signin-modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Login</h3>
+          <h3 className="font-bold text-lg">Sign In</h3>
           <div className="modal-action">
-            <form>
-              {/* if there is a button in form, it will close the modal */}
+            <form action={handleGoogleSignIn}>
               <button className='btn'>
                 <FcGoogle />
                 Sign in with Google

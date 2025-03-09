@@ -1,7 +1,12 @@
 import SignInModal from '@/app/components/auth/SignInModal'
 import Link from 'next/link'
+import { createClient } from '@/app/utils/supabase/server'
+import { signout } from '@/app/lib/auth.actions'
 
-const Navbar = () => {
+const Navbar = async () => {
+  const supabase = await createClient()
+  const { data } = await supabase.auth.getUser()
+  console.log(data.user?.user_metadata)
   return (
     <nav>
       <div className="drawer">
@@ -30,12 +35,27 @@ const Navbar = () => {
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
                 {/* Desktop Navbar Content */}
-                <li>
-                  <Link href={'/dashboard'}>Dashboard</Link>
-                </li>
-                <li>
-                  <SignInModal />
-                </li>
+                {data.user ? (
+                  <>
+                    <li>
+                      <Link href={'/dashboard'}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <button className='btn' onClick={signout}>Sign Out</button>
+                    </li>
+
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link href={'/dashboard'}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <SignInModal />
+                    </li>
+                  </>
+                )
+                }
               </ul>
             </div>
           </div>
@@ -44,6 +64,26 @@ const Navbar = () => {
           <label htmlFor="drawer-side-nav" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 min-h-full w-80 p-4">
             {/* Mobile Sidebar Content */}
+            {data.user ? (
+              <>
+                <li>
+                  <Link href={'/dashboard'}>Dashboard</Link>
+                </li>
+                <li>
+                  <button className='btn'>Sign Out</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href={'/dashboard'}>Dashboard</Link>
+                </li>
+                <li>
+                  <SignInModal />
+                </li>
+              </>
+            )
+            }
             <li>
               <Link href={'/dashboard'}>Dashboard</Link>
             </li>
