@@ -34,7 +34,7 @@ const Navbar = async () => {
               <Link href={"/"}>MSR</Link>
             </div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal">
+              <ul className="menu menu-horizontal flex items-center justify-between gap-2">
                 {/* Desktop Navbar Content */}
                 {user && user.user_metadata ? (
                   <>
@@ -42,17 +42,15 @@ const Navbar = async () => {
                       <Link href={'/dashboard'}>Dashboard</Link>
                     </li>
                     <li>
-                      <button onClick={signout}>Sign Out</button>
+                      <button className='btn-error' onClick={signout}>Sign Out</button>
                     </li>
-                    <li>
-                      <Image
-                        className='rounded-full'
-                        src={user.user_metadata.picture}
-                        alt="User Profile Picture"
-                        width={80}
-                        height={90}
-                      />
-                    </li>
+                    <Image
+                      className='rounded-full'
+                      src={user.user_metadata.picture}
+                      alt="User Profile Picture"
+                      width={45}
+                      height={45}
+                    />
                   </>
                 ) : (
                   <>

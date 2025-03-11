@@ -12,7 +12,7 @@ const SignInPage = () => {
             Ready to up your study game? Create an account now!
           </p>
           <form action={signInWithGoogle}>
-            <button className='btn btn-primary'>
+            <button className='btn btn-accent hover:btn-outline'>
               <FcGoogle />
               Sign in with Google
             </button>
