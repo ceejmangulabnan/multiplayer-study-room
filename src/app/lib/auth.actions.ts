@@ -76,10 +76,9 @@ export async function signInWithGoogle() {
       redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
-  console.log("GOOGLE DATA", data)
 
   if (error) {
-    console.log(error);
+    console.error("Google Sign In Error:", error);
     redirect("/error");
   }
 
