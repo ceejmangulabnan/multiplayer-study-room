@@ -61,7 +61,7 @@ export async function signout() {
     redirect("/error");
   }
 
-  redirect("/logout");
+  redirect("/login");
 }
 
 export async function signInWithGoogle() {
@@ -71,13 +71,14 @@ export async function signInWithGoogle() {
     options: {
       queryParams: {
         access_type: "offline",
-        prompt: "consent",
+        response_type: "code"
       },
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
 
   if (error) {
-    console.log(error);
+    console.error("Google Sign In Error:", error);
     redirect("/error");
   }
 

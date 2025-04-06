@@ -1,7 +1,12 @@
-import SignInModal from '@/app/components/auth/SignInModal'
+import Image from 'next/image'
 import Link from 'next/link'
+import { createClient } from '@/app/utils/supabase/server'
+import { signout } from '@/app/lib/auth.actions'
 
-const Navbar = () => {
+const Navbar = async () => {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   return (
     <nav>
       <div className="drawer">
@@ -28,14 +33,34 @@ const Navbar = () => {
               <Link href={"/"}>MSR</Link>
             </div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal">
+              <ul className="menu menu-horizontal flex items-center justify-between gap-2">
                 {/* Desktop Navbar Content */}
-                <li>
-                  <Link href={'/dashboard'}>Dashboard</Link>
-                </li>
-                <li>
-                  <SignInModal />
-                </li>
+                {user && user.user_metadata ? (
+                  <>
+                    <li>
+                      <Link href={'/dashboard'}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <button className='btn-error' onClick={signout}>Sign Out</button>
+                    </li>
+                    <Image
+                      className='rounded-full'
+                      src={user.user_metadata.picture}
+                      alt="User Profile Picture"
+                      width={45}
+                      height={45}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link href={'/dashboard'}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link href={`/login`}>Login</Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
@@ -44,12 +69,25 @@ const Navbar = () => {
           <label htmlFor="drawer-side-nav" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 min-h-full w-80 p-4">
             {/* Mobile Sidebar Content */}
-            <li>
-              <Link href={'/dashboard'}>Dashboard</Link>
-            </li>
-            <li>
-              <SignInModal />
-            </li>
+            {user && user.user_metadata ? (
+              <>
+                <li>
+                  <Link href={'/dashboard'}>Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={signout}>Sign Out</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href={'/dashboard'}>Dashboard</Link>
+                </li>
+                <li>
+                  <Link href={`/sign-in`}>Sign In</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
