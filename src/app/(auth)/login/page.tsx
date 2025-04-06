@@ -1,7 +1,7 @@
 import { signInWithGoogle } from '@/app/lib/auth.actions'
 import { FcGoogle } from "react-icons/fc";
 
-const SignInPage = () => {
+const LoginPage = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -23,4 +23,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default LoginPage

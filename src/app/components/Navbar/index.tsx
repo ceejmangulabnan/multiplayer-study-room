@@ -6,7 +6,6 @@ import { signout } from '@/app/lib/auth.actions'
 const Navbar = async () => {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  console.log(user?.user_metadata)
 
   return (
     <nav>
@@ -58,7 +57,7 @@ const Navbar = async () => {
                       <Link href={'/dashboard'}>Dashboard</Link>
                     </li>
                     <li>
-                      <Link href={`/sign-in`}>Sign In</Link>
+                      <Link href={`/login`}>Login</Link>
                     </li>
                   </>
                 )}
