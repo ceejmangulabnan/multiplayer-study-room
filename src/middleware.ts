@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   // Allow access to root and login page without authentication
-  if (path === '/' || path.startsWith('/login')) {
+  if (path === '/' || path.startsWith('/login') || path.startsWith('/auth/callback')) {
     return NextResponse.next()
   }
 
