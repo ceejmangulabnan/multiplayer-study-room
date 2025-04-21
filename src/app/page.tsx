@@ -1,4 +1,4 @@
-import Navbar from '@/app/components/Navbar'
+import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 

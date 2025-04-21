@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { createClient } from '@/app/utils/supabase/server'
-import { signOut } from '@/app/lib/auth.actions'
+import { createClient } from '@/utils/supabase/server'
+import { signOut } from '@/lib/auth.actions'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'

@@ -1,7 +1,7 @@
 // middleware.ts (at root level)
 import { type NextRequest, NextResponse } from 'next/server'
-import { updateSession } from '@/app/utils/supabase/middleware'
-import { createClient } from '@/app/utils/supabase/server'
+import { updateSession } from '@/utils/supabase/middleware'
+import { createClient } from '@/utils/supabase/server'
 
 export async function middleware(request: NextRequest) {
   // Get the pathname

@@ -1,5 +1,5 @@
-import Navbar from '@/app/components/Navbar';
-import { signInWithGoogle } from '@/app/lib/auth.actions'
+import Navbar from '@/components/Navbar';
+import { signInWithGoogle } from '@/lib/auth.actions'
 import { Button } from '@/components/ui/button';
 import { FcGoogle } from "react-icons/fc";
 
