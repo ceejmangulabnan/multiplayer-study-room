@@ -1,13 +1,14 @@
 import Navbar from '@/app/components/Navbar'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <>
+    <div className='min-h-screen flex flex-col'>
       <Navbar />
 
-      <main>
-        <div className="hero bg-base-200 min-h-screen">
+      <main className='flex-1 flex items-center justify-center'>
+        <div>
           <div className="hero-content text-center">
             <div className="max-w-lg">
               <h1 className="text-5xl font-bold">Turn Studying into a Multiplayer Game!</h1>
@@ -15,12 +16,12 @@ export default function Home() {
                 Your virtual study group—whenever, wherever.
               </p>
               <Link href='/login'>
-                <button className="btn btn-primary">Get Started</button>
+                <Button className="font-bold">Get Started</Button>
               </Link>
             </div>
           </div>
         </div>
       </main>
-    </>
+    </div>
   )
 }

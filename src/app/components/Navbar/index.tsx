@@ -12,7 +12,7 @@ const Navbar = async () => {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <nav className='px-6 py-4'>
+    <nav className='z-50 px-6 py-4'>
       {/* Desktop */}
       <div className='justify-between hidden md:flex'>
         <Link href={'/'} className='font-bold'>MSR</Link>
@@ -41,14 +41,12 @@ const Navbar = async () => {
       </div>
 
       {/* Mobile */}
-
       <div className='justify-between flex md:hidden'>
         <Link href={'/'} className='font-bold'>MSR</Link>
         <DropdownMenu>
           <DropdownMenuTrigger >
             <Menu />
           </DropdownMenuTrigger>
-
           <DropdownMenuContent>
             {
               user && user.user_metadata ? (
@@ -66,7 +64,6 @@ const Navbar = async () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
     </nav>
 
   )
