@@ -1,6 +1,6 @@
 "use client"
 
-import { signInWithGoogle } from '@/app/lib/auth.actions';
+import { signInWithGoogle } from '@/lib/auth.actions';
 import { useRef } from 'react'
 import { FcGoogle } from "react-icons/fc";
 
