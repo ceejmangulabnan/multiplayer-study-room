@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { createClient } from '@/app/utils/supabase/server'
 import { signOut } from '@/app/lib/auth.actions'

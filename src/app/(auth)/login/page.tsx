@@ -1,12 +1,13 @@
 import Navbar from '@/app/components/Navbar';
 import { signInWithGoogle } from '@/app/lib/auth.actions'
+import { Button } from '@/components/ui/button';
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   return (
-    <>
+    <div className='min-h-screen flex flex-col'>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="flex-1 flex items-center justify-center">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">Welcome!</h1>
@@ -14,16 +15,16 @@ const LoginPage = () => {
               Ready to up your study game? Create an account now!
             </p>
             <form action={signInWithGoogle}>
-              <button className='btn btn-accent hover:btn-outline'>
+              <Button className='flex font-bold mx-auto'>
                 <FcGoogle />
                 Sign in with Google
-              </button>
+              </Button>
             </form>
           </div>
         </div>
       </main>
 
-    </>
+    </div>
   )
 }
 
