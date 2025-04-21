@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   // Allow access to root and login page without authentication
-  if (path === '/' || path.startsWith('/login') || path.startsWith('/auth/callback')) {
+  if (path === '/' || path.startsWith('/auth/callback')) {
     return NextResponse.next()
   }
 
@@ -24,6 +24,10 @@ export async function middleware(request: NextRequest) {
   // If no user, redirect to login
   if (!user) {
     return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  if (user && path.startsWith('/login')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   // Otherwise, return the updated session response
