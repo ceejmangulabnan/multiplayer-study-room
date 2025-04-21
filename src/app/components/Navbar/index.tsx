@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { LogIn, LogOut, Menu } from 'lucide-react'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const Navbar = async () => {
   const supabase = await createClient()
@@ -17,24 +18,30 @@ const Navbar = async () => {
         <Link href={'/'} className='font-bold'>MSR</Link>
         {
           user && user.user_metadata ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar>
-                  <AvatarImage src={user?.user_metadata.avatar_urls} />
-                  <AvatarFallback>{user?.user_metadata.full_name.slice(0, 1)}</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className='flex gap-2 py-1 px-2' onClick={signOut}>
-                  <LogOut />
-                  Sign Out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className='flex items-center gap-4'>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar>
+                    <AvatarImage src={user?.user_metadata.avatar_urls} />
+                    <AvatarFallback>{user?.user_metadata.full_name.slice(0, 1)}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className='flex gap-2 py-1 px-2' onClick={signOut}>
+                    <LogOut />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <ThemeToggle />
+            </div>
           ) : (
-            <Button className='font-bold'>
-              <Link href={'/login'}>Sign In</Link>
-            </Button>
+            <div className='flex items-center gap-4'>
+              <Button className='font-bold'>
+                <Link href={'/login'}>Sign In</Link>
+              </Button>
+              <ThemeToggle />
+            </div>
           )
         }
       </div>
@@ -49,15 +56,21 @@ const Navbar = async () => {
           <DropdownMenuContent>
             {
               user && user.user_metadata ? (
-                <DropdownMenuItem className='flex gap-2 py-1 px-2' onClick={signOut}>
-                  <LogOut />
-                  Sign Out
-                </DropdownMenuItem>
+                <>
+                  <DropdownMenuItem className='flex gap-2 py-1 px-2' onClick={signOut}>
+                    <LogOut />
+                    Sign Out
+                  </DropdownMenuItem>
+                  <ThemeToggle dropdownItem={true} />
+                </>
               ) : (
-                <DropdownMenuItem className='flex gap-2 py-1 px-2' >
-                  <LogIn />
-                  Sign In
-                </DropdownMenuItem>
+                <>
+                  <DropdownMenuItem className='flex gap-2 py-1 px-2' >
+                    <LogIn />
+                    Sign In
+                  </DropdownMenuItem>
+                  <ThemeToggle dropdownItem={true} />
+                </>
               )
             }
           </DropdownMenuContent>

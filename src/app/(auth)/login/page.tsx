@@ -23,7 +23,6 @@ const LoginPage = () => {
           </div>
         </div>
       </main>
-
     </div>
   )
 }
