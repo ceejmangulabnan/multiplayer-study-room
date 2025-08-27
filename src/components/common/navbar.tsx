@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { LogIn, LogOut, Menu } from 'lucide-react'
-import ThemeToggle from '@/components/ThemeToggle'
+import ThemeToggle from '@/components/common/theme-toggle'
 
 const Navbar = async () => {
   const supabase = await createClient()

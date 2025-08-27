@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/common/navbar';
 import { signInWithGoogle } from '@/lib/auth.actions'
 import { Button } from '@/components/ui/button';
 import { FcGoogle } from "react-icons/fc";

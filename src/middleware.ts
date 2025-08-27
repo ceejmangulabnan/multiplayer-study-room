@@ -7,11 +7,6 @@ export async function middleware(request: NextRequest) {
   // Get the pathname
   const path = request.nextUrl.pathname
 
-  // Allow access to root and login page without authentication
-  if (path === '/' || path.startsWith('/login') || path.startsWith('/auth/callback')) {
-    return NextResponse.next()
-  }
-
   // First update the session
   const response = await updateSession(request)
 
@@ -21,9 +16,20 @@ export async function middleware(request: NextRequest) {
   // Check if user is authenticated
   const { data: { user } } = await supabase.auth.getUser()
 
+  // Allow access to root and login page without authentication
+  // if (path === '/' || path.startsWith('/auth/callback') || path === '/login') {
+  //   return NextResponse.next()
+  // }
+
   // If no user, redirect to login
   if (!user) {
+    console.log("No user found, redirecting to login")
     return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  if (user && path.startsWith('/login')) {
+    console.log("User found, redirecting to dashboard")
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   // Otherwise, return the updated session response
