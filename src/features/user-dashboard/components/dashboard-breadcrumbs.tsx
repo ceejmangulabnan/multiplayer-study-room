@@ -17,7 +17,7 @@ const DashboardBreadcrumbs = () => {
   const segments = pathname.split('/').filter(Boolean)
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className='border-b border-solid border-black p-4'>
       <BreadcrumbList>
         <BreadcrumbItem>
           <SidebarTrigger />

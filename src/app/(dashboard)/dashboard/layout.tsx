@@ -1,6 +1,6 @@
-import { SidebarProvider } from '@/components/ui/sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import DashboardSidebar from '@/features/user-dashboard/components/dashboard-sidebar'
-import DashboardBreadcrumbs from '@/features/user-dashboard/components/dashboard-breadcrumbs.tsx'
+import DashboardBreadcrumbs from '@/features/user-dashboard/components/dashboard-breadcrumbs'
 
 const DashboardLayout = async ({
   children
@@ -9,12 +9,14 @@ const DashboardLayout = async ({
 }) => {
 
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={true}>
       <DashboardSidebar />
-      <div>
+      <SidebarInset>
         <DashboardBreadcrumbs />
-        {children}
-      </div>
+        <div className='my-4'>
+          {children}
+        </div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

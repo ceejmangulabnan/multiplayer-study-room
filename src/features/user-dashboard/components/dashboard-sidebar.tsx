@@ -1,15 +1,18 @@
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Link from 'next/link'
+import ThemeToggle from '@/components/common/theme-toggle'
 
 // Menu items.
 const items = [
@@ -42,7 +45,10 @@ const items = [
 
 const DashboardSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar className='bg-background' collapsible='offcanvas' {...props}>
+    <Sidebar collapsible='offcanvas' variant='inset' {...props}>
+      <SidebarHeader>
+        <Link href={'/'} className='font-bold'>MSR</Link>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -62,7 +68,14 @@ const DashboardSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-    </Sidebar>
+      <SidebarFooter>
+        <SidebarMenuItem key={"Theme"}>
+          <SidebarMenuButton asChild>
+            <ThemeToggle />
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarFooter>
+    </Sidebar >
   )
 }
 
