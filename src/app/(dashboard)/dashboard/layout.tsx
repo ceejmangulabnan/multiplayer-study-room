@@ -1,6 +1,7 @@
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import DashboardSidebar from '@/features/user-dashboard/components/dashboard-sidebar'
 import DashboardBreadcrumbs from '@/features/user-dashboard/components/dashboard-breadcrumbs'
+import { Separator } from '@/components/ui/separator'
 
 const DashboardLayout = async ({
   children
@@ -12,7 +13,11 @@ const DashboardLayout = async ({
     <SidebarProvider defaultOpen={true}>
       <DashboardSidebar />
       <SidebarInset>
-        <DashboardBreadcrumbs />
+        <nav className='flex items-center border-b border-solid  px-4 py-4'>
+          <SidebarTrigger />
+          <Separator orientation='vertical' className='mx-4' />
+          <DashboardBreadcrumbs />
+        </nav>
         <div className='my-4'>
           {children}
         </div>

@@ -10,18 +10,14 @@ import {
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb"
 import Link from 'next/link'
-import { SidebarTrigger } from '@/components/ui/sidebar'
 
 const DashboardBreadcrumbs = () => {
   const pathname = usePathname()
   const segments = pathname.split('/').filter(Boolean)
 
   return (
-    <Breadcrumb className='border-b border-solid border-black p-4'>
+    <Breadcrumb>
       <BreadcrumbList>
-        <BreadcrumbItem>
-          <SidebarTrigger />
-        </BreadcrumbItem>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
