@@ -18,7 +18,7 @@ const DashboardLayout = async ({
           <Separator orientation='vertical' className='mx-4' />
           <DashboardBreadcrumbs />
         </nav>
-        <div className='my-4'>
+        <div>
           {children}
         </div>
       </SidebarInset>
