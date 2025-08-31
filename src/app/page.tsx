@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { SidebarInset } from '@/components/ui/sidebar'
 import Navbar from '@/components/common/navbar'
 
 export default function Home() {
   return (
-    <SidebarInset className='min-h-screen flex flex-col'>
+    <main className='min-h-screen flex flex-col'>
       <Navbar />
       <div className="flex flex-1 items-center justify-center">
         <div className="text-center">
@@ -18,6 +17,6 @@ export default function Home() {
           </Link>
         </div>
       </div>
-    </SidebarInset>
+    </main>
   )
 }

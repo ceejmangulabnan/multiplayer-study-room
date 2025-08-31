@@ -1,20 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { createClient } from "@/utils/supabase/client"
 import { useRouter } from "next/navigation"
+import { SetupValidator, SetupRequest } from "@/lib/validators/setup"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import Link from 'next/link'
 
 export default function SetupPage() {
   const router = useRouter()
-  const [username, setUsername] = useState("")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [loading, setLoading] = useState(false)
+  const form = useForm<SetupRequest>({
+    resolver: zodResolver(SetupValidator),
+    defaultValues: {
+      username: "",
+      firstName: "",
+      lastName: "",
+    },
+  })
 
-  const handleSetup = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setLoading(true)
-
+  const onSubmit = async (values: SetupRequest) => {
     const supabase = createClient()
     const {
       data: { user },
@@ -24,9 +38,9 @@ export default function SetupPage() {
       const { error } = await supabase
         .from("profiles")
         .update({
-          username,
-          first_name: firstName,
-          last_name: lastName,
+          username: values.username,
+          first_name: values.firstName,
+          last_name: values.lastName,
           updated_at: new Date().toISOString(),
         })
         .eq("id", user.id)
@@ -37,80 +51,64 @@ export default function SetupPage() {
         router.push("/dashboard")
       }
     }
-    setLoading(false)
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Set Up Your Profile</h1>
-        <form onSubmit={handleSetup} className="space-y-6">
-          <div className="relative">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 border rounded-md shadow-sm focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+    <div className="flex items-center justify-center min-h-screen bg-primary-foreground dark:bg-foreground/5">
+      <div className="border-2 w-full max-w-md p-8 space-y-4 rounded-lg shadow-lg bg-background">
+        <h1 className="text-2xl font-bold text-center">Set Up Your Profile</h1>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="ilovemsr" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div className="relative">
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              First Name
-            </label>
-            <input
-              id="firstName"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 border rounded-md shadow-sm focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div className="relative">
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Last Name
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 border rounded-md shadow-sm focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Doe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-4 py-2 font-bold text-white rounded-md bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              {loading ? "Saving..." : "Save"}
-            </button>
-          </div>
-        </form>
-        <div className="text-center">
-          <button
-            onClick={() => router.push("/dashboard?skipped=true")}
-            className="text-sm text-gray-600 hover:underline dark:text-gray-400"
-          >
-            Skip for now
-          </button>
-        </div>
+            <div className='flex flex-col items-center gap-2'>
+              <Button type="submit" className='w-full'>Submit</Button>
+              <Link
+                href={"/dashboard?skipped=true"}
+                className="text-sm text-gray-600 hover:underline dark:text-gray-400"
+              >
+                Skip for now
+              </Link>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   )

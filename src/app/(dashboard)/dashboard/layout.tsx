@@ -13,7 +13,7 @@ const DashboardLayout = async ({
     <SidebarProvider defaultOpen={true}>
       <DashboardSidebar />
       <SidebarInset>
-        <nav className='flex items-center border-b border-solid  px-4 py-4'>
+        <nav className='flex items-center border-b border-solid px-4 py-4'>
           <SidebarTrigger />
           <Separator orientation='vertical' className='mx-4' />
           <DashboardBreadcrumbs />
