@@ -50,7 +50,7 @@ const StudyRoomSection = () => {
                 </CardTitle>
                 <p>{room.description}</p>
               </div>
-              <div className="flex justify-between text-xs text-muted-foreground mt-4">
+              <div className="flex justify-between text-xs text-muted-foreground mt-8">
                 <p>{room.members} members</p>
                 <p>{room.online} online</p>
               </div>
