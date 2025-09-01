@@ -43,8 +43,8 @@ const StudyRoomSection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {studyRooms.map((room) => (
           <Card key={room.name} className="flex flex-col">
-            <CardContent className="p-4 flex flex-col flex-grow justify-between">
-              <div className="flex-grow">
+            <CardContent className="p-4 flex flex-col grow justify-between">
+              <div className="grow">
                 <CardTitle className="text-lg hover:underline underline-offset-4">
                   <Link href="/dashboard">{room.name}</Link>
                 </CardTitle>
