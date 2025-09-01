@@ -1,31 +1,28 @@
-import React from 'react'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import DashboardSidebar from '@/features/user-dashboard/components/dashboard-sidebar'
+import DashboardBreadcrumbs from '@/features/user-dashboard/components/dashboard-breadcrumbs'
+import { Separator } from '@/components/ui/separator'
 
 const DashboardLayout = async ({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) => {
 
   return (
-
-    <main>
-      <div className="drawer">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {/* Sidebar content here */}
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-          </ul>
-        </div>
-      </div>
-      {children}
-    </main>
+    <SidebarProvider defaultOpen={true}>
+      <DashboardSidebar />
+      <SidebarInset>
+        <nav className='flex items-center border-b border-solid px-4 py-4'>
+          <SidebarTrigger />
+          <Separator orientation='vertical' className='mx-4' />
+          <DashboardBreadcrumbs />
+        </nav>
+        <main>
+          {children}
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
 
