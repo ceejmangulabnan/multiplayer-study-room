@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import StudyRoomSection from '@/features/user-dashboard/components/study-room-section'
 
 const Dashboard = async ({ searchParams }: { searchParams: { skipped: string } }) => {
   const supabase = await createClient()
@@ -56,6 +58,9 @@ const Dashboard = async ({ searchParams }: { searchParams: { skipped: string } }
           </p>
         </div>
       </div>
+
+      {/* Preview of Study Rooms, quick create button */}
+      <StudyRoomSection />
     </div>
   )
 }
