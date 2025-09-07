@@ -12,7 +12,12 @@ const StudyRoomSection = () => {
   const { rooms, isLoading, isError } = useRooms()
 
   return (
-    <section className="my-4">
+    <motion.section
+      className="my-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: 0.05 }}
+    >
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Your study rooms</h2>
         <Button>Create room</Button>
@@ -39,7 +44,7 @@ const StudyRoomSection = () => {
               <RoomCard key={room.id} room={room} />
             </motion.div>))}
       </div>
-    </section>
+    </motion.section>
   )
 }
 

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import StudyRoomSection from '@/features/user-dashboard/components/study-room-section'
 import { fetchRooms } from '@/features/rooms/lib/rooms-actions'
+import WelcomeHeader from '@/features/user-dashboard/components/welcome-message'
 
 const Dashboard = async ({
   searchParams,
@@ -69,18 +70,11 @@ const Dashboard = async ({
         </div>
       )}
       <div>
-        <div>
-          <h1 className="text-3xl font-bold">
-            Hi, {profile?.first_name || profile?.full_name}
-          </h1>
-          <p className="py-2 text-muted-foreground">
-            Welcome to Multiplayer Study Room
-          </p>
-        </div>
+        <WelcomeHeader profile={profile} />
       </div>
 
-      <StudyRoomSection rooms={rooms} />
-    </div>
+      <StudyRoomSection />
+    </div >
   )
 }
 
