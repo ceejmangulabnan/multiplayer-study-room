@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Raleway, Lora } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from '@/providers/theme-provider'
+import TanstackQueryProvider from '@/providers/tanstack-query-provider'
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -34,7 +35,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TanstackQueryProvider>
+            {children}
+          </TanstackQueryProvider>
         </ThemeProvider>
       </body>
     </html>
