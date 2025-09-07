@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { Raleway, Lora } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from '@/providers/theme-provider';
+import type { Metadata } from "next"
+import { Raleway, Lora } from "next/font/google"
+import "./globals.css"
+import { ThemeProvider } from '@/providers/theme-provider'
+import TanstackQueryProvider from '@/providers/tanstack-query-provider'
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -34,9 +35,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TanstackQueryProvider>
+            {children}
+          </TanstackQueryProvider>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

@@ -20,6 +20,7 @@
     "@radix-ui/react-tooltip": "^1.2.3",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
+    "@tanstack/react-query": "^5.87.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.501.0",
@@ -37,12 +38,14 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.12",
+    "@tanstack/eslint-plugin-query": "^5.86.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",
+    "supabase": "^2.39.2",
     "tailwindcss": "^4.1.12",
     "typescript": "^5"
   }

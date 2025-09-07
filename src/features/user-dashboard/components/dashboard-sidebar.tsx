@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { LayoutDashboard, Home, NotebookTabs, Settings } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -14,31 +14,25 @@ import {
 import Link from 'next/link'
 import ThemeToggle from '@/components/common/theme-toggle'
 
-// Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: LayoutDashboard,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Study Rooms",
+    url: "/rooms",
+    icon: NotebookTabs,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ]
