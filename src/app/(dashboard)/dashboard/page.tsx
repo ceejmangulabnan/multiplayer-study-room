@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import StudyRoomSection from '@/features/user-dashboard/components/study-room-section'
+import { fetchRooms } from '@/features/rooms/lib/rooms-actions'
 
 const Dashboard = async ({
   searchParams,
@@ -12,9 +13,7 @@ const Dashboard = async ({
   const skipped = params.skipped
 
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
     return redirect("/login")
@@ -25,6 +24,9 @@ const Dashboard = async ({
     .select("user_name, first_name, last_name, full_name")
     .eq("id", user.id)
     .single()
+
+  const rooms = await fetchRooms()
+  console.log("Study Rooms SA", rooms)
 
   if (error) {
     console.error("Error fetching profile:", error)
@@ -77,8 +79,7 @@ const Dashboard = async ({
         </div>
       </div>
 
-      {/* Preview of Study Rooms, quick create button */}
-      <StudyRoomSection />
+      <StudyRoomSection rooms={rooms} />
     </div>
   )
 }
