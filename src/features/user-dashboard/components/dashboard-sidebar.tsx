@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, Home, NotebookTabs, Search, Settings } from "lucide-react"
+import { LayoutDashboard, Home, NotebookTabs, Settings } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +14,6 @@ import {
 import Link from 'next/link'
 import ThemeToggle from '@/components/common/theme-toggle'
 
-// Menu items.
 const items = [
   {
     title: "Home",
