@@ -2,7 +2,6 @@ import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import StudyRoomSection from '@/features/user-dashboard/components/study-room-section'
-import { fetchRooms } from '@/features/rooms/lib/rooms-actions'
 import WelcomeHeader from '@/features/user-dashboard/components/welcome-message'
 
 const Dashboard = async ({
@@ -20,17 +19,14 @@ const Dashboard = async ({
     return redirect("/login")
   }
 
-  const { data: profile, error } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("user_name, first_name, last_name, full_name")
     .eq("id", user.id)
     .single()
 
-  const rooms = await fetchRooms()
-  console.log("Study Rooms SA", rooms)
-
-  if (error) {
-    console.error("Error fetching profile:", error)
+  if (profileError) {
+    console.error("Error fetching profile:", profileError)
   }
 
   const profileComplete =
@@ -69,10 +65,7 @@ const Dashboard = async ({
           to get the best experience.
         </div>
       )}
-      <div>
-        <WelcomeHeader profile={profile} />
-      </div>
-
+      <WelcomeHeader profile={profile} />
       <StudyRoomSection />
     </div >
   )
