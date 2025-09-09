@@ -1,3 +1,3 @@
-import { Database } from '@/types/supabase';
+import { Tables } from '@/types/supabase';
 
-export type Profile = Database['public']['Tables']['profiles']['Row']
+export type Profile = Tables<'profiles'>

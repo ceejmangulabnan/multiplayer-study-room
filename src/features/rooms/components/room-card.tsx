@@ -6,7 +6,7 @@ import { Room } from '@/types/rooms-types'
 
 const RoomCard = ({ room }: { room: Room }) => {
   return (
-    <Card key={room.name} className="flex flex-col">
+    <Card key={room.name} className="h-full flex flex-col">
       <CardContent className="p-4 flex flex-col grow justify-between">
         <div className="grow">
           <div className="flex justify-between items-start">
@@ -20,9 +20,10 @@ const RoomCard = ({ room }: { room: Room }) => {
           <p>{room.description}</p>
         </div>
         <div className="flex justify-end text-xs text-muted-foreground mt-8">
-          <Button asChild>
-            <Link href={`/rooms/room/${room.short_id}`}>
-              View Room <ArrowRight />
+          <Button asChild className='hover:scale-101 transition-all active:scale-99'>
+            <Link href={`/rooms/${room.short_id}`}>
+              <span>View Room</span>
+              <ArrowRight />
             </Link>
           </Button>
         </div>

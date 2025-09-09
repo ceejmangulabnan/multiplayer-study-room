@@ -39,9 +39,9 @@ export default function WelcomeHeader({ profile }: { profile: Partial<Profile> |
       </h1>
       <motion.p
         className="py-2 text-muted-foreground"
-        initial={{ opacity: 0, x: 10 }}
+        initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         Welcome to Multiplayer Study Room
       </motion.p>

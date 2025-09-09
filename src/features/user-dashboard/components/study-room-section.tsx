@@ -1,8 +1,8 @@
 "use client"
 
-import { Button } from '@/components/ui/button'
 import RoomCard from '@/features/rooms/components/room-card'
 import RoomCardSkeleton from '@/features/rooms/components/room-card-skeleton'
+import CreateRoomModal from '@/features/user-dashboard/components/create-room-modal'
 import useRooms from '@/features/rooms/lib/use-rooms'
 import { motion } from 'motion/react'
 
@@ -20,7 +20,7 @@ const StudyRoomSection = () => {
     >
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Your study rooms</h2>
-        <Button>Create room</Button>
+        <CreateRoomModal />
       </div>
 
       <div

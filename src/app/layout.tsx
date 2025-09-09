@@ -3,6 +3,7 @@ import { Raleway, Lora } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from '@/providers/theme-provider'
 import TanstackQueryProvider from '@/providers/tanstack-query-provider'
+import { Toaster } from '@/components/ui/sonner'
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -37,6 +38,7 @@ export default function RootLayout({
         >
           <TanstackQueryProvider>
             {children}
+            <Toaster />
           </TanstackQueryProvider>
         </ThemeProvider>
       </body>
