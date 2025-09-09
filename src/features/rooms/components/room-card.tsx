@@ -6,7 +6,7 @@ import { Room } from '@/types/rooms-types'
 
 const RoomCard = ({ room }: { room: Room }) => {
   return (
-    <Card key={room.name} className="flex flex-col">
+    <Card key={room.name} className="h-full flex flex-col">
       <CardContent className="p-4 flex flex-col grow justify-between">
         <div className="grow">
           <div className="flex justify-between items-start">
