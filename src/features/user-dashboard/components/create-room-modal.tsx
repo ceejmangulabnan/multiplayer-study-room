@@ -74,7 +74,7 @@ const CreateRoomModal = ({ redirectOnCreate = true }: CreateRoomModalProps) => {
 
       toast.success('Room Created Successfully')
     },
-    onError: (_err) => {
+    onError: () => {
       toast.error('Failed to create room. Please try again.')
     },
     onSettled: () => {
