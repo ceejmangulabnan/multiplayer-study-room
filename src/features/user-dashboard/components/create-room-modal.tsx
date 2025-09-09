@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useRouter } from 'next/navigation'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -29,6 +30,7 @@ import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { createRoom } from "@/features/rooms/lib/rooms-actions"
 import { Room } from "@/types/rooms-types"
+import { toast } from 'sonner'
 
 const roomFormSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -38,9 +40,14 @@ const roomFormSchema = z.object({
 
 type RoomFormValues = z.infer<typeof roomFormSchema>
 
-const CreateRoomModal = () => {
+interface CreateRoomModalProps {
+  redirectOnCreate?: boolean
+}
+
+const CreateRoomModal = ({ redirectOnCreate = true }: CreateRoomModalProps) => {
   const [open, setOpen] = useState(false)
   const queryClient = useQueryClient()
+  const router = useRouter()
 
   const form = useForm<RoomFormValues>({
     resolver: zodResolver(roomFormSchema),
@@ -53,40 +60,26 @@ const CreateRoomModal = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: createRoom,
-    onMutate: async (newRoomData: RoomFormValues) => {
+    onSuccess: (newRoom: Room) => {
       setOpen(false)
-      await queryClient.cancelQueries({ queryKey: ["rooms"] })
-
-      const previousRooms = queryClient.getQueryData<Room[]>(["rooms"])
+      form.reset()
 
       queryClient.setQueryData<Room[]>(["rooms"], (old) => {
-        const optimisticRoom: Room = {
-          id: `temp-${Date.now()}`,
-          created_at: new Date().toISOString(),
-          owner_id: "optimistic-user-id",
-          name: newRoomData.name,
-          description: newRoomData.description || '',
-          is_private: newRoomData.isPrivate,
-          short_id: ""
-        }
-        return old ? [...old, optimisticRoom] : [optimisticRoom]
+        return old ? [...old, newRoom] : [newRoom]
       })
 
-      return { previousRooms }
-    },
-    onError: (_err, _newRoom, context) => {
-      if (context?.previousRooms) {
-        queryClient.setQueryData(["rooms"], context.previousRooms)
+      if (redirectOnCreate && newRoom.short_id) {
+        router.push(`/rooms/${newRoom.short_id}`)
       }
-      // TODO: show error toast
+
+      toast.success('Room Created Successfully')
+    },
+    onError: (_err) => {
+      toast.error('Failed to create room. Please try again.')
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["rooms"] })
-    },
-    onSuccess: () => {
-      form.reset()
-      // TODO: show success toast
-    },
+    }
   })
 
   const onSubmit = (values: RoomFormValues) => {
